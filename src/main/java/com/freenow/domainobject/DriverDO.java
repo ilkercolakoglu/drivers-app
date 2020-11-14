@@ -2,24 +2,17 @@ package com.freenow.domainobject;
 
 import com.freenow.domainvalue.GeoCoordinate;
 import com.freenow.domainvalue.OnlineStatus;
-import java.time.ZonedDateTime;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(
-    name = "driver",
-    uniqueConstraints = @UniqueConstraint(name = "uc_username", columnNames = {"username"})
+        name = "driver",
+        uniqueConstraints = @UniqueConstraint(name = "uc_username", columnNames = {"username"})
 )
 public class DriverDO
 {
@@ -54,6 +47,9 @@ public class DriverDO
     @Column(nullable = false)
     private OnlineStatus onlineStatus;
 
+    @OneToOne
+    private CarDO carDO;
+
 
     private DriverDO()
     {
@@ -70,6 +66,22 @@ public class DriverDO
         this.onlineStatus = OnlineStatus.OFFLINE;
     }
 
+    /**
+     * created for example instance for findbyexample method.
+     * New params can be added for maintanance.
+     * @param username
+     * @param onlineStatus
+     */
+    public DriverDO(String username, OnlineStatus onlineStatus) {
+        this.dateCreated = null;
+        this.username = username;
+        this.password = null;
+        this.deleted = false;
+        this.coordinate = null;
+        this.dateCoordinateUpdated = null;
+        this.onlineStatus = onlineStatus;
+        this.carDO = null;
+    }
 
     public Long getId()
     {
@@ -131,4 +143,25 @@ public class DriverDO
         this.dateCoordinateUpdated = ZonedDateTime.now();
     }
 
+    public CarDO getCarDO() {
+        return carDO;
+    }
+
+    public void setCarDO(CarDO carDO) {
+        this.carDO = carDO;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DriverDO driverDO = (DriverDO) o;
+        return Objects.equals(id, driverDO.id);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
+    }
 }

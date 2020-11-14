@@ -1,6 +1,8 @@
 package com.freenow.controller.mapper;
 
+import com.freenow.datatransferobject.CarDTO;
 import com.freenow.datatransferobject.DriverDTO;
+import com.freenow.domainobject.CarDO;
 import com.freenow.domainobject.DriverDO;
 import com.freenow.domainvalue.GeoCoordinate;
 import java.util.Collection;
@@ -26,6 +28,12 @@ public class DriverMapper
         if (coordinate != null)
         {
             driverDTOBuilder.setCoordinate(coordinate);
+        }
+
+        CarDO carDO = driverDO.getCarDO();
+        if(carDO != null ){
+            CarDTO carDTO = CarMapper.makeCarDTO(carDO);
+            driverDTOBuilder.setCarDTO(carDTO);
         }
 
         return driverDTOBuilder.createDriverDTO();
