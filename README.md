@@ -74,3 +74,24 @@ Good luck!
 
 
 _NOTE: Please make sure to not submit any personal data with your tests result. Personal data is for example your name, your birth date, email address etc._
+
+
+
+**************************
+
+All tasks that you write has been completed included optional task.
+
+2 different users has been created.
+You can just access to API with these users.
+
+1) username: user
+
+    password: userPass
+    
+    only access car APIs
+ 
+2) username: admin
+
+   password: adminPass
+   
+   access to all APIs
