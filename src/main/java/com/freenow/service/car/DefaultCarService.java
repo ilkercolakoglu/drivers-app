@@ -57,10 +57,10 @@ public class DefaultCarService implements CarService {
     }
 
     /**
-     * Deletes an existing driver by id.
+     * Deletes an existing car by id.
      *
      * @param carId
-     * @throws EntityNotFoundException if no driver with the given id was found.
+     * @throws EntityNotFoundException if no car with the given id was found.
      */
     @Override
     @Transactional
@@ -70,7 +70,7 @@ public class DefaultCarService implements CarService {
     }
 
     /**
-     * Find all drivers by online state.
+     * Find all drivers by engineType
      *
      * @param engineType
      */
@@ -93,7 +93,7 @@ public class DefaultCarService implements CarService {
 
     /**
      * @param carDO
-     * @return car who are metched with example instance
+     * @return car who are matched with example instance
      * @throws EntityNotFoundException
      */
     @Override
